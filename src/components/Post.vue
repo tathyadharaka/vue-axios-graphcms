@@ -29,12 +29,12 @@
 </template>
 
 <script>
-import { ENDPOINT, apiClient, POST_BY_SLUG_QUERY } from '../graphcms.js';
-import CommentList from '@/components/CommentList';
-import CommentForm from '@/components/CommentForm';
+import { ENDPOINT, apiClient, POST_BY_SLUG_QUERY } from "../graphcms.js";
+import CommentList from "@/components/CommentList";
+import CommentForm from "@/components/CommentForm";
 
 export default {
-  name: 'Post',
+  name: "Post",
   components: {
     CommentList,
     CommentForm
@@ -42,9 +42,9 @@ export default {
   data() {
     return {
       loading: false,
-      slug: '',
-      post: {},
-    }
+      slug: "",
+      post: {}
+    };
   },
   methods: {
     async fetchPost() {
@@ -61,7 +61,7 @@ export default {
         this.post = body.post;
         this.loading = false;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
   },
@@ -69,5 +69,5 @@ export default {
     this.slug = this.$route.params.slug;
     this.fetchPost();
   }
-}
+};
 </script>

@@ -2,33 +2,35 @@
   <section class="post-list">
     <h1>{{ category }} Articles</h1>
     <hr/>
-    <b-row v-if="loading" align-h="center">
-      <b-col>
-        <div class="lds-dual-ring text-center"></div>
+    <b-row v-if="loading">
+      <b-col class="text-center">
+        <div class="lds-dual-ring"></div>
       </b-col>
     </b-row>
-    <b-card v-if="!loading" tag="article" v-for="post in posts" :key="post.id" :title="post.title" :sub-title="post.categories.map(cat => cat.name).toString()">
-      <p class="card-text">
-        {{ post.content }}
-      </p>
-      <router-link class="btn btn-primary" :to="'post/' + post.slug">
-        Read Post
-      </router-link>
-    </b-card>
+    <div v-if="!loading" >
+      <b-card tag="article" v-for="post in posts" :key="post.id" :title="post.title" :sub-title="post.categories.map(cat => cat.name).toString()">
+        <p class="card-text">
+          {{ post.content }}
+        </p>
+        <router-link class="btn btn-primary" :to="'post/' + post.slug">
+          Read Post
+        </router-link>
+      </b-card>
+    </div>
   </section>
 </template>
 
 <script>
-import { ENDPOINT, apiClient, POSTS_BY_CATEGORY_QUERY } from '../graphcms.js';
+import { ENDPOINT, apiClient, POSTS_BY_CATEGORY_QUERY } from "../graphcms.js";
 
 export default {
   name: "PostList",
-  data(){
+  data() {
     return {
-      category: '',
+      category: "",
       loading: false,
       posts: []
-    }
+    };
   },
   methods: {
     async fetchPosts() {
@@ -45,7 +47,7 @@ export default {
         this.posts = await body.category.posts;
         this.loading = false;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
   },
@@ -54,13 +56,13 @@ export default {
     this.fetchPosts();
   },
   watch: {
-    $route(to, from) {
+    $route() {
       this.category = this.$route.name;
       this.posts = [];
       this.fetchPosts();
     }
   }
-}
+};
 </script>
 
 <style>
@@ -77,8 +79,7 @@ h1{
   display: block;
   width: 46px;
   height: 46px;
-  margin-top: 10vh;
-  margin-left: 30vw;
+  margin: 1px;
   border-radius: 50%;
   border: 5px solid #ccc;
   border-color: #ccc transparent #ccc transparent;
@@ -92,5 +93,4 @@ h1{
     transform: rotate(360deg);
   }
 }
-
 </style>

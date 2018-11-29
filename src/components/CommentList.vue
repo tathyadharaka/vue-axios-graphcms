@@ -12,6 +12,6 @@
 <script>
 export default {
   name: "CommentsList",
-  props: ["comments"],
-}
+  props: ["comments"]
+};
 </script>

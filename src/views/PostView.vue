@@ -5,13 +5,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import Post from '@/components/Post.vue'
+import Post from "@/components/Post.vue";
 
 export default {
-  name: 'PostView',
+  name: "PostView",
   components: {
     Post
   }
-}
+};
 </script>
